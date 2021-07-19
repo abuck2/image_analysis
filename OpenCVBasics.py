@@ -63,6 +63,7 @@ display("canvas", canvas)
 #args = Path
 cap = cv2.VideoCapture("03_Working_on_Videos/data/clip.mp4")
 
+fps = 0
 while True :
     start_time = time.time()
     ret, frame = cap.read()
