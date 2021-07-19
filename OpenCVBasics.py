@@ -1,5 +1,5 @@
 import numpy as np
-import cv2
+import cv2, time
 
 img = cv2.imread("01_Image_Basics/images/flemingo.jpg")
 
@@ -53,3 +53,29 @@ for r in range(0,175,25):
     cv2.circle(canvas, (centerx, centery), r, white)
 
 display("canvas", canvas)
+
+###############################################
+#Video
+##############################################
+
+#standard display
+#videos
+#args = Path
+cap = cv2.VideoCapture("03_Working_on_Videos/data/clip.mp4")
+
+while True :
+    start_time = time.time()
+    ret, frame = cap.read()
+    if not ret:
+        break
+    else :
+        cv2.putText(frame,'FPS: {:.0f}'.format(fps),(30,40),cv2.FONT_HERSHEY_SIMPLEX,1.5,
+                (255,255,255),1)
+        cv2.imshow("frame", frame)
+        if cv2.waitKey(1) == ord("q"):
+            break
+    end_time = time.time() - start_time
+    fps = 1/time_taken
+cap.release
+cv2.destroyAllWindows()
+
