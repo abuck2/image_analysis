@@ -12,6 +12,6 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 boxes, detections = face_cascade.detectMultiScale2(gray)
 
 
-print(boxes) #4 lignes = 4 visages
+print(boxes) #4 lignes = 4 visages, x, Y, height, width
 print(detections)  # We need to find a threshold of minN (6 for ex)
 boxes, detections = face_cascade.detectMultiScale2(gray, minNeighbors=6)
