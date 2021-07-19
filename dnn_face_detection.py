@@ -27,7 +27,7 @@ def face_detection_dnn(img):
         confidence = detections[0,0,i,2]
         if confidence > 0.5:
             # diagonal points 3: 7
-            box = detections[0,0,i,3:7]*np.array([w,h,w,h])
+            box = detections[0,0,i,3:7]*np.array([w,h,w,h]) #boxes are normalized to image size
             box = box.astype('int')
             pt1 = (box[0],box[1])
             pt2 = (box[2],box[3])
@@ -42,4 +42,22 @@ def face_detection_dnn(img):
 img_detect = face_detection_dnn(img)
 cv2.imshow('face detection',img_detect)
 cv2.waitKey(2500)
+cv2.destroyAllWindows()
+
+#From a stream
+cap = cv2.VideoCapture(0)
+
+while True:
+    ret, frame = cap.read()
+
+    if ret == False:
+        break
+
+    img_detection = face_detection_dnn(frame)
+
+    cv2.imshow('Real Time Face Detection with DNN',img_detection)
+    if cv2.waitKey(1) == ord('a'):
+        break
+
+cap.release()
 cv2.destroyAllWindows()
