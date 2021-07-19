@@ -26,3 +26,23 @@ def detection(img):
     cv2.waitKey(2500)
     cv2.destroyAllWindows()
     return image
+
+#from video stream
+cap = cv2.VideoCapture(0)
+
+face_cascade = cv2.CascadeClassifier('./model/haarcascade_frontalface_default.xml')
+
+while True:
+    ret, frame = cap.read()
+    if ret == False:
+        break
+
+    img_detect = detection(frame)
+
+    cv2.imshow('Real Time Face Detection',img_detect)
+    if cv2.waitKey(1) == ord('a'):
+        break
+
+
+cap.release()
+cv2.destroyAllWindows()
